@@ -149,7 +149,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 110603300}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 91f0f0cef2e8049498c87891c63bd6f2, type: 2}
+  m_Material: {fileID: 6200000, guid: 7eaaf4fe89cd6c74a9085c96634a226b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -377,7 +377,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.4, y: -2.51, z: 0}
-  m_LocalScale: {x: 39.91, y: 1, z: 1}
+  m_LocalScale: {x: 55.32, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -557,7 +557,7 @@ MonoBehaviour:
   JumpForce: 2
   MaxJumpTime: 0.2
   WolfTime: 0.5
-  MoveSpeed: 2
+  MoveSpeed: 3
   DashImpulse: 6
   WallSlideForce: {x: 0, y: 0.3}
   WallJumpImpulse: {x: 6, y: 3}
@@ -1116,7 +1116,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2055689272}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 91f0f0cef2e8049498c87891c63bd6f2, type: 2}
+  m_Material: {fileID: 6200000, guid: 7eaaf4fe89cd6c74a9085c96634a226b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1213,7 +1213,7 @@ Transform:
   m_GameObject: {fileID: 2055689272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.04, y: 10.34, z: 0}
+  m_LocalPosition: {x: -4.01, y: 8.56, z: 0}
   m_LocalScale: {x: 1, y: 16.33, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
