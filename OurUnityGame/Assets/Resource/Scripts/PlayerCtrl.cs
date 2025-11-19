@@ -7,16 +7,15 @@ using Unity.VisualScripting;
 public class PlayerCtrl : MonoBehaviour
 {
     private readonly float erf = 0.01f;
-    [InspectorLabel("冲刺/蹬墙后锁定水平移动时间")]
+    [Header("冲刺/蹬墙后锁定水平移动时间")]
     public float LockHorizontalMoveTime;
-    [InspectorLabel("跳跃时长")]
+    [Header("普通跳跃参数")]
+    public float JumpForce;
     public float MaxJumpTime; private float CurJumpTime;
-    [InspectorLabel("土狼时间")]
     public float WolfTime; private float EscapeGroundTime;
-    [InspectorLabel("基本设置")]
+    [Header("基本设置")]
     public float MoveSpeed;
     public float DashImpulse;
-    public float JumpForce;
     public Vector2 WallSlideForce;
     public Vector2 WallJumpImpulse;
     private Vector2 Direction;
@@ -94,10 +93,12 @@ public class PlayerCtrl : MonoBehaviour
     {
         Ray2D ray1 = new Ray2D(transform.position + Vector3.left * 0.4f, Vector2.down);
         Ray2D ray2 = new Ray2D(transform.position + Vector3.right * 0.4f, Vector2.down);
-        Debug.DrawRay(ray1.origin, ray1.direction, Color.red);
-        Debug.DrawRay(ray2.origin, ray2.direction, Color.red);
-        var hits1 = Physics2D.RaycastAll(ray1.origin, ray1.direction, 0.6f);
-        var hits2 = Physics2D.RaycastAll(ray2.origin, ray2.direction, 0.6f);
+        var hits1 = Physics2D.RaycastAll(ray1.origin, ray1.direction, 1.1f);
+        var hits2 = Physics2D.RaycastAll(ray2.origin, ray2.direction, 1.1f);
+
+        Debug.DrawLine(ray1.origin, ray1.origin + (Vector2)ray1.direction * 1.1f, Color.red);
+        Debug.DrawLine(ray2.origin, ray2.origin + (Vector2)ray2.direction * 1.1f, Color.red);
+
         foreach (var hit in hits1)
             if (hit.transform.CompareTag("Ground"))
                 return true;
@@ -108,10 +109,18 @@ public class PlayerCtrl : MonoBehaviour
     }
     private bool WallDetect()
     {
-        Ray2D ray = new Ray2D(transform.position + Vector3.up * 0.4f, Direction);
-        Debug.DrawRay(ray.origin, ray.direction, Color.yellow);
-        var hits = Physics2D.RaycastAll(ray.origin, ray.direction, 0.6f);
-        foreach (var hit in hits)
+        Ray2D ray1 = new Ray2D(transform.position + Vector3.up * 0.9f, Direction);
+        Ray2D ray2 = new Ray2D(transform.position + Vector3.down * 0.9f, Direction);
+        var hits1 = Physics2D.RaycastAll(ray1.origin, ray1.direction, 0.6f);
+        var hits2 = Physics2D.RaycastAll(ray2.origin, ray2.direction, 0.6f);
+
+        Debug.DrawLine(ray1.origin, ray1.origin + (Vector2)ray1.direction * 0.6f, Color.yellow);
+        Debug.DrawLine(ray2.origin, ray2.origin + (Vector2)ray2.direction * 0.6f, Color.yellow);
+
+        foreach (var hit in hits1)
+            if (hit.transform.CompareTag("Wall"))
+                return true;
+        foreach (var hit in hits2)
             if (hit.transform.CompareTag("Wall"))
                 return true;
         return false;
