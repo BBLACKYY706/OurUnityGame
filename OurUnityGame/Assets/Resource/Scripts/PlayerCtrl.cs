@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
-using Unity.VisualScripting;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -47,13 +43,16 @@ public class PlayerCtrl : MonoBehaviour
         {
             rb.AddForce(WallSlideForce);
         }
-        if (LockMoveTime <= 0f)
-            HorizontalMove();
+        HorizontalMove();
         WallJump();
         Jump();
         Dash();
     }
-    private void HorizontalMove() => rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * MoveSpeed, rb.velocity.y);
+    private void HorizontalMove()
+    {
+        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= erf && LockMoveTime <= 0f)
+            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * MoveSpeed, rb.velocity.y);
+    }
     private void UpdateFaceDirection()
     {
         if (Mathf.Abs(rb.velocity.x) >= erf)
