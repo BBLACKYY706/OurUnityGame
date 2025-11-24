@@ -61,6 +61,13 @@ public class PlayerCtrl : MonoBehaviour
     }
     private void Jump()
     {
+        // 检查是否在重力反转模式，如果是则跳过跳跃
+        PlayerAbilities abilities = GetComponent<PlayerAbilities>();
+        if (abilities != null && abilities.IsInGravityReverseMode())
+        {
+            return; // 在重力反转模式下不执行跳跃
+        }
+
         if (Input.GetKey(KeyCode.Space) && CurJumpTime <= MaxJumpTime && !inSky)
         {
             rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Force);
@@ -80,6 +87,11 @@ public class PlayerCtrl : MonoBehaviour
             canDash = false;
             LockMoveTime = LockHorizontalMoveTime;
         }
+    }
+    public void ResetDash()
+    {
+        canDash = true;
+        Debug.Log("冲刺已重置");
     }
     private void WallJump()
     {
